@@ -3,7 +3,7 @@ import chromium from 'chrome-aws-lambda';
 
 export default async function (request, response) {
 
-    console.log(await chromium.executablePath + '\naaaaaaaaaaaaaaaaaaaaaaaa')
+    console.log(await process.env.LAMBDA_RUNTIME_DIR + '\naaaaaaaaaaaaaaaaaaaaaaaa')
 
     const isDev = !process.env.AWS_REGION
 
