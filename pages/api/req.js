@@ -3,8 +3,8 @@ import chrome from 'chrome-aws-lambda';
 
 export default async function (request, response) {
 
-    console.log(await chrome.executablePath)
-    
+    console.log(await chrome.executablePath + '\naaaaaaaaaaaaaaaaaaaaaaaa')
+
     const isDev = !process.env.AWS_REGION
 
     const preparePageForTests = async (page) => {
