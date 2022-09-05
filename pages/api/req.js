@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer-core')
-const chromium = require('chrome-aws-lambda');
+const chrome =  require('chrome-aws-lambda');
 
 export default async function (request, response) {
 
@@ -10,7 +10,7 @@ export default async function (request, response) {
           'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Safari/537.36';
         await page.setUserAgent(userAgent);
       }   
-    
+
     async function getOptions() {
         let exepath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
         let options = {}
@@ -24,21 +24,16 @@ export default async function (request, response) {
             }
         } else {
             options = {
-                args: [...chromium.args, '--disable-web-security'],
-                executablePath: process.env.LAMBDA_RUNTIME_DIR,
-                headless: chromium.headless
+                args: chrome.args,
+                executablePath: await chrome.executablePath,
+                headless: chrome.headless
               }
         }
+
         return options
     }
-
     const options = await getOptions()
-  if (!isDev) {
-       const browser = await chromium.puppeteer.launch(options)
-    } else {
-       const browser = await puppeteer.launch(options)
-    }
-
+    const browser = await chrome.puppeteer.launch(options)
 
     const page = await browser.newPage();
     await preparePageForTests(page);
@@ -87,5 +82,4 @@ export default async function (request, response) {
 
 
     response.send(dados)
-
 }
