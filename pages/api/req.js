@@ -50,7 +50,7 @@ export default async function (request, response) {
 
 
     await page.goto('https://www.drogasil.com.br/search?w='+ request.query.produto + '&p=' + request.query.p)
-    await page.waitForTimeout(1000)
+    await page.waitForTimeout(3000)
 
     const verifyPage = await page.$$eval('h1', Page => Page.map(pg => pg.innerText))
     if (verifyPage[0] !== undefined && verifyPage[0] !== null) {
@@ -87,6 +87,7 @@ export default async function (request, response) {
 
     browser.close()
 
+    response.setHeader('Cache-Control', 's-max-age=86400', 'stale-while-revalidate')
 
     response.send(dados)
 }
