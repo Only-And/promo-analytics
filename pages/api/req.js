@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer-core')
-import chromium from 'chromium-aws-lambda';
+import chromium from 'chrome-aws-lambda';
 
 export default async function (request, response) {
 
