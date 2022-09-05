@@ -1,5 +1,7 @@
 const puppeteer = require('puppeteer-core')
-const chrome =  require('chrome-aws-lambda');
+import chrome from 'chrome-aws-lambda';
+
+console.log(process.env.AWS_REGION)
 
 export default async function (request, response) {
 
@@ -24,17 +26,21 @@ export default async function (request, response) {
             }
         } else {
             options = {
-                args: chrome.args,
+                args: [...chrome.args, '--disable-web-security'],
                 executablePath: await chrome.executablePath,
                 headless: chrome.headless
               }
         }
-
         return options
     }
 
     const options = await getOptions()
-    const browser = await puppeteer.launch(options)
+    if(isDev) {
+        const browser = await puppeteer.launch(options)
+
+    } else {
+        const browser = await chrome.puppeteer.launch(options)
+    }
 
     const page = await browser.newPage();
     await preparePageForTests(page);
