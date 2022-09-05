@@ -3,8 +3,6 @@ const chromium = require('chrome-aws-lambda');
 
 export default async function (request, response) {
 
-    console.log(await process.env.LAMBDA_RUNTIME_DIR + '\naaaaaaaaaaaaaaaaaaaaaaaa')
-
     const isDev = !process.env.AWS_REGION
 
     const preparePageForTests = async (page) => {
@@ -35,12 +33,12 @@ export default async function (request, response) {
     }
 
     const options = await getOptions()
-    if(isDev) {
-        const browser = await puppeteer.launch(options)
-
+  if (!isDev) {
+       const browser = await chromium.puppeteer.launch(options)
     } else {
-        const browser = await chromium.puppeteer.launch(options)
+       const browser = await puppeteer.launch(options)
     }
+
 
     const page = await browser.newPage();
     await preparePageForTests(page);
