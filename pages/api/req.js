@@ -87,7 +87,7 @@ export default async function (request, response) {
 
     browser.close()
 
-    response.setHeader('Cache-Control', 's-max-age=86400', 'stale-while-revalidate')
+    response.setHeader('Cache-Control', 's-max-age=86400', 'stale-while-revalidate=86400')
 
     response.send(dados)
 }
