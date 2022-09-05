@@ -1,6 +1,8 @@
 const puppeteer = require('puppeteer-core')
 const chrome =  require('chrome-aws-lambda');
 
+console.log(process.env.AWS_REGION)
+
 export default async function (request, response) {
 
     const isDev = !process.env.AWS_REGION
