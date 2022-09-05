@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer-core')
-const chrome =  require('chrome-aws-lambda');
+import chrome from 'chrome-aws-lambda';
 
 console.log(process.env.AWS_REGION)
 
