@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer-core')
-import chromium from 'chrome-aws-lambda';
+const chromium = require('chrome-aws-lambda');
 
 export default async function (request, response) {
 
@@ -27,7 +27,7 @@ export default async function (request, response) {
         } else {
             options = {
                 args: [...chromium.args, '--disable-web-security'],
-                executablePath: await chromium.executablePath,
+                executablePath: process.env.LAMBDA_RUNTIME_DIR,
                 headless: chromium.headless
               }
         }
