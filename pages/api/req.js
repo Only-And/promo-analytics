@@ -31,7 +31,6 @@ export default async function (request, response) {
                 headless: chrome.headless
               }
         }
-        console.log(chrome.executablePath)
         return options
     }
 
