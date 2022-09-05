@@ -1,10 +1,10 @@
 const puppeteer = require('puppeteer-core')
 import chrome from 'chrome-aws-lambda';
 
-console.log(process.env.AWS_REGION)
-
 export default async function (request, response) {
 
+    console.log(await chrome.executablePath)
+    
     const isDev = !process.env.AWS_REGION
 
     const preparePageForTests = async (page) => {
