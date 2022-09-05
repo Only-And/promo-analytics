@@ -12,7 +12,13 @@ export default async function (request, response) {
       }   
 
     async function getOptions() {
-        let exepath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+        const chromeExecPaths = {
+            win32: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+            linux: '/usr/bin/google-chrome',
+            darwin: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+          }
+          
+         const exePath = chromeExecPaths[process.platform]
         let options = {}
         if(isDev) {
             options = {
@@ -20,11 +26,12 @@ export default async function (request, response) {
                 args: [
                     '--disable-web-security'
                 ],
-                executablePath: exepath
+                executablePath: exePath
             }
         } else {
             options = {
                 args: chrome.args,
+                ignoreDefaultArgs: ['--disable-extensions'],
                 executablePath: await chrome.executablePath,
                 headless: chrome.headless
               }
