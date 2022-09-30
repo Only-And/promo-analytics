@@ -1,9 +1,7 @@
 const puppeteer = require('puppeteer-core')
-import chromium from 'chromium-aws-lambda';
+const chrome =  require('chrome-aws-lambda');
 
 export default async function (request, response) {
-
-    console.log(await chromium.executablePath + '\naaaaaaaaaaaaaaaaaaaaaaaa')
 
     const isDev = !process.env.AWS_REGION
 
@@ -12,9 +10,15 @@ export default async function (request, response) {
           'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Safari/537.36';
         await page.setUserAgent(userAgent);
       }   
-    
+
     async function getOptions() {
-        let exepath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+        const chromeExecPaths = {
+            win32: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+            linux: '/usr/bin/google-chrome',
+            darwin: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+          }
+          
+         const exePath = chromeExecPaths[process.platform]
         let options = {}
         if(isDev) {
             options = {
@@ -22,25 +26,21 @@ export default async function (request, response) {
                 args: [
                     '--disable-web-security'
                 ],
-                executablePath: exepath
+                executablePath: exePath
             }
         } else {
             options = {
-                args: [...chromium.args, '--disable-web-security'],
-                executablePath: await chromium.executablePath,
-                headless: chromium.headless
+                args: chrome.args,
+                ignoreDefaultArgs: ['--disable-extensions'],
+                executablePath: await chrome.executablePath,
+                headless: chrome.headless
               }
         }
+
         return options
     }
-
     const options = await getOptions()
-    if(isDev) {
-        const browser = await puppeteer.launch(options)
-
-    } else {
-        const browser = await chromium.puppeteer.launch(options)
-    }
+    const browser = await chrome.puppeteer.launch(options)
 
     const page = await browser.newPage();
     await preparePageForTests(page);
@@ -87,7 +87,7 @@ export default async function (request, response) {
 
     browser.close()
 
+    response.setHeader('Cache-Control', 's-max-age=86400', 'stale-while-revalidate=86400')
 
     response.send(dados)
-
 }

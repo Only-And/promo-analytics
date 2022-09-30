@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-
+import '../styles/Menu.css'
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }

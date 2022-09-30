@@ -1,0 +1,95 @@
+
+.main_form {
+    padding-top: 90px;
+    display: flex;
+    flex-wrap: wrap;
+
+    background-image: var(--img_link);
+    background-size: cover;
+    min-height: 92vh;
+    max-height: auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.section_formulario {
+    flex-wrap: wrap;
+
+    width: 1000px;
+    min-height: 50vh;
+    max-height: 90vh;
+    overflow-y: scroll;
+    background-color: var(--section-formulario);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    z-index: 0;
+}
+
+.formulario {
+    margin-top: 10vh;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-left: 33%;
+}
+
+.input_01 {
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 5px 2px;
+    background-color: var(--input_01);
+}
+
+.select_farmacia {
+    margin-left: 15px;
+
+    padding: 5px 2px;
+    border: none;
+    border-radius: 5px;
+}
+
+.button_search {
+    margin-left: 10px;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background: var(--button_search_color);
+    transition: 0.2s ease-in;
+}
+
+.button_search:enabled {
+    background: var(--button_search_color);
+}
+
+.button_search:disabled {
+    background: var(--button_search_color_disabled);
+
+}
+
+.label_medicamento {
+    /* display: inline-block; */
+    margin-left: 5%;
+    margin-right: 12%;
+    color: var(--labels_form_analise);
+}
+
+.label_farmacia {
+    
+    color: var(--labels_form_analise);
+}
+
+.div_products {
+
+}
+
+.table {
+    margin-top: 10vh;
+    border: 1px solid black;
+    border-collapse: collapse;
+
+}

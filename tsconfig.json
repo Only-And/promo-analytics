@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/api/teste.js", "pages/api/_lib/chromiumOptions.ts"  ],
+, "pages/api/teste.js", "pages/api/_lib/chromiumOptions.ts", "public/mobile-navbar.js"  ],
   "exclude": [
     "node_modules"
   ]
