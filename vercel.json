@@ -2,7 +2,7 @@
 	"functions": {
 		"pages/api/req.js": {
 			"memory": 2048,
-			"maxDuration": 30
+			"maxDuration": 10
 		}
 	}
 }
