@@ -20,7 +20,6 @@ export default function Home() {
       </Head>
       <Menu/>
       <script src="mobile-navbar.js"></script>
-      <script src="button.js"></script>
     </div>
   )
 }
