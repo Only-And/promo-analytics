@@ -19,7 +19,7 @@ export default function Home() {
 
       </Head>
       <Menu/>
-      <script src="mobile-navbar.js"></script>
+      <script src="mobile-navbar.js" defer></script>
     </div>
   )
 }
